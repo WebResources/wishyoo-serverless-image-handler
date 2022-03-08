@@ -9,5 +9,5 @@ This python code does two separate things.
 
 The python files starting with "efs" handles reading of the EFS volume and converting the jpgs or jpegs to webp thumbnails.
 
-![Overview](https://github.com/WebResources/wishyoo-serverless-image-handler/blob/master/WishyooServerlessImageHandler.drawio-2.png?raw=true)
+![Overview](https://github.com/WebResources/wishyoo-serverless-image-handler/blob/main/WishyooServerlessImageHandler.drawio-2.png?raw=true)
 
