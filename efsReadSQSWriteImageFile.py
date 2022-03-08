@@ -36,7 +36,7 @@ def get_filenames(folderpath, bucket, stage):
 
                 key = stage + filepath[9:]
 
- #               save_S3(filepath, bucket, key)
+                save_S3(filepath, bucket, key)
 
 
 def save_S3(localFileName, bucketName, keyName):
