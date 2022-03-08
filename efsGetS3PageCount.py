@@ -21,8 +21,6 @@ def getPaginatorList(bucket, prefix):
     operation_parameters = {'Bucket': bucket,
                             'Prefix': prefix}
 
-    print(operation_parameters)
-
     page_iterator = paginator.paginate(**operation_parameters)
 
     pageCount = 0
