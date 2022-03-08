@@ -19,15 +19,6 @@ def lambda_handler(event, context):
         write_list(localFileName, os_list)
         save_S3(localFileName, bucket, 'image_path/'+ stage + item +'.txt')
 
-#    if len(os_list) > 10:
-#    print(os_list[0:10])
-
-#    for item in os_list[:1000]:
-#        get_filenames(folderpath + '/' + item, bucket)
-
-
- #   count_files(folderpath)
-
     return {
         'statusCode': 200,
         'body': json.dumps('Hello from Lambda!')
@@ -48,27 +39,15 @@ def count_files(folderpath):
 
 def get_filenames(folderpath, bucket):
 
-    count = 0
-
     for(path, dirs, files) in os.walk(folderpath, topdown=True):
-#        for filename in fnmatch.filter(files, '*.jpg'):
+
         for filename in files:
-            filepath = os.path.join(path, filename)
-            count += 1
-#            if count % 10 == 0:
-            print(f"{count} {filepath}")
+            if fnmatch.fnmatch(filename, '*.jpeg') or fnmatch.fnmatch(filename, '*.jpg') or fnmatch.fnmatch(filename, '*.png'):
+                filepath = os.path.join(path, filename)
+                key = "dev/" + filepath[9:]
 
-            key = "dev/" + filepath[9:]
-
- #           save_S3(filepath, bucket, key)
-
-
-#        for filename in files:
-#            if fnmatch.fnmatch(filename, '*.jpeg') or fnmatch.fnmatch(filename, '*.jpg') or fnmatch.fnmatch(filename, '*.png'):
-#                filepath = os.path.join(path, filename)
-#                count += 1
-#                if count % 10 == 0:
-#                    print(f"{count} {filepath}")
+                save_S3(filepath, bucket, key)
+                
 
 def save_S3(localFileName, bucketName, keyName):
 
