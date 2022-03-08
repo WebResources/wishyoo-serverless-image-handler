@@ -22,11 +22,8 @@ def lambda_handler(event, context):
 
         key_out = key.split('.')[0] + ".webp"
 
-
         localFileName = copyFileTMP(key)
         save_S3(localFileName, bucket_in, key)
-
-        print(f"save_S3 {localFileName}")
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
             imageLambda = executor.submit(invoke_SIH_lambda, bucket_in, key, width, height, request)
