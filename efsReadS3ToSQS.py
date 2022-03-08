@@ -15,7 +15,7 @@ def lambda_handler(event, context):
 
     keyNameList = getPaginatorList(bucket, prefix, startPage, endPage, keysToReturnPerPage)
 
-    showKeyNameList(keyNameList)
+ #   showKeyNameList(keyNameList)
 
     sendMessageSQS(bucket, sqsURL, keyNameList)
 
@@ -64,9 +64,8 @@ def getPaginatorList(bucket, prefix, startPage, endPage, keysToReturnPerPage):
         if pageCount >= endPage:
             break
 
-    print(f"pageCount = {pageCount}")
-
     return keyList
+
 
 def sendMessageSQS(bucket, sqsURL, listNames):
 
