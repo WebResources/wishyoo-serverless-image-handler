@@ -26,8 +26,6 @@ def lambda_handler(event, context):
         key_out = key.split('.')[0] + ".webp"
 
 
-        print(f"bucket {bucket_in} key {key} keyOut {key_out}")
-
         binaryOutput = copyFileTMPMemory(key)
         save_S3_from_memory( io.BytesIO(binaryOutput), bucket_in, key)
 
@@ -55,21 +53,16 @@ def save_S3_from_memory(buf, bucketName, keyName):
 
     object = s3.Object(bucketName, keyName)
     response = object.put(Body=buf)
-
-    print(f"response {response}")
     
     return True
 
-def copyFileTMPMemory(filepath):
 
-#    localFileName = '/tmp/' + filepath.rsplit('/',1)[1]
+def copyFileTMPMemory(filepath):
 
     output = b''
 
     with open('/mnt/efs/' + filepath, "rb") as f:
         output = f.read()
-
-    print(f"output {type(output)} {sys.getsizeof(output)}")
 
     return output
 
@@ -117,19 +110,14 @@ def save_S3(localFileName, bucketName, keyName):
 
     s3Client = boto3.client('s3')
 
-    print(f"save_s3 {localFileName} {bucketName} {keyName}")
-    print(f"filesize {os.path.getsize(localFileName)}")
-
     if not os.path.exists(localFileName):
         time.sleep(2)
         print(f"os.path {localFileName} does not exist")
-    else:
-        print(f"os.path.exists {localFileName}")
 
     if(os.path.exists(localFileName)):
         response = s3Client.upload_file(localFileName, bucketName, keyName)
-  #      if response != None:
-        print(f"response {response}")
+        if response != None:
+            print(f"response {response}")
     else:
         print(f"file {localFileName} does not exist")
 
