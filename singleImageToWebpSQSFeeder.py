@@ -3,7 +3,7 @@ import boto3
 
 def lambda_handler(event, context):
 
-    jsonString = '{\"efsPathIn\":\"attachments/109464/109464.jpeg\",\"imageWidth\":\"246\",\"imageHeight\":\"320\"\"BucketOut\":\"wishyoo-sih-output\", \"keyOut\":\"attachments/109464/109464.jpeg\"}'
+    jsonString = '{\"efsPathIn\":\"attachments/109464/109464.jpeg\",\"imageWidth\":\"246\",\"imageHeight\":\"320\",\"bucketOut\":\"wishyoo-sih-output\", \"keyOut\":\"attachments/109464/109464.jpeg\"}'
 
     sqsURL = "https://sqs.us-west-2.amazonaws.com/727869158831/single-image-to-webp-sqs"
 
